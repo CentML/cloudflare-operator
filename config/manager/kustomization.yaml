@@ -1,12 +1,12 @@
 resources:
-- manager.yaml
+    - manager.yaml
 
 generatorOptions:
-  disableNameSuffixHash: true
+    disableNameSuffixHash: true
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-- name: controller
-  newName: adyanth/cloudflare-operator
-  newTag: 0.12.0
+    - name: controller
+      newName: ghcr.io/centml/cloudflare-operator
+      newTag: 0.12.0-centml
