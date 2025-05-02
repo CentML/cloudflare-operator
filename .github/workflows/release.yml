@@ -42,8 +42,20 @@ jobs:
                   registry: ghcr.io
                   username: ${{ github.repository_owner }}
                   password: ${{ secrets.GITHUB_TOKEN }}
-            - name: Build and push
-              uses: docker/build-push-action@v2
+            # Build the Docker image for all events, but do not push
+            # We use linux/amd64 for the build only as it's faster on GitHub Actions
+            - name: Build image
+              uses: docker/build-push-action@v5
+              with:
+                  context: .
+                  platforms: linux/amd64
+                  push: false
+                  tags: ${{ steps.meta.outputs.tags }}
+                  labels: ${{ steps.meta.outputs.labels }}
+            # Push the Docker image only when a GitHub Release is published
+            - name: Push image
+              if: github.event_name == 'release' && github.event.action == 'published'
+              uses: docker/build-push-action@v5
               with:
                   context: .
                   platforms: linux/amd64,linux/arm64
