@@ -43,11 +43,12 @@ jobs:
                   username: ${{ github.repository_owner }}
                   password: ${{ secrets.GITHUB_TOKEN }}
             # Build the Docker image for all events, but do not push
+            # We use linux/amd64 for the build only as it's faster on GitHub Actions
             - name: Build image
               uses: docker/build-push-action@v5
               with:
                   context: .
-                  platforms: linux/amd64,linux/arm64
+                  platforms: linux/amd64
                   push: false
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
