@@ -10,6 +10,8 @@ on:
         branches:
             - "forked-main"
     workflow_dispatch:
+    release:
+        types: [published]
 
 jobs:
     docker:
