@@ -138,7 +138,7 @@ type TunnelBinding struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   TunnelBindingSpec   `json:"spec,omitempty"`
+	Spec   TunnelBindingSpec   `json:"spec"`
 	Status TunnelBindingStatus `json:"status,omitempty"`
 }
 
